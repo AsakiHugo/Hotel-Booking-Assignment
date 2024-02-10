@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/masterLayout :: layout(~{::main})">
+<body>
+
+<main role="main">
+    <section class="container-fluid contact-section d-flex justify-content-center align-items-center">
+        <div class="container text-white w-100 mt-5 mt-md-0">
+            <div class="row row-gap-3 mt-5 mt-md-0">
+                <div class="col-md-4">
+                    <div class="card">
+                        <h3 class="card-header contact-header">Contact</h3>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-map-marked-alt"></i>
+                                Address
+                            </h5>
+                            <p class="card-text">
+                                No-376 BoBaHtoo(12) street,
+                                Hlaing Tharyar, Yangon.
+                            </p>
+                            <h5 class="card-title">
+                                <i class="fas fa-phone"></i>
+                                Phone
+                            </h5>
+                            <p class="card-text">
+                                09-787357071, 09-787357071
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 text-center">
+                    <div class="card p-3 p-md-4">
+                        <i class="fas fa-envelope-open-text envelope-icon"></i>
+                        <div class="card-body">
+                            <h2 class="card-title text-uppercase">subscribe</h2>
+                            <p class="lead card-text">
+                                Subscriber our newsletter to receive the latest updates and
+                                promostions.
+                            </p>
+                            <form method="post"
+                                th:action="@{/contact/subscribe}"
+                            >
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="floatingInput"
+                                           placeholder="example@gmail.com" name="email">
+                                    <label for="floatingInput">Email address</label>
+                                </div>
+                                <button class="w-50 btn btn-lg btn-primary text-uppercase" type="submit">
+                                    subscribe
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

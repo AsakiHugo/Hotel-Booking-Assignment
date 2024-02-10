@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/masterLayout :: layout(~{::main})">
+<body>
+
+<main role="main">
+    <section class="container-fluid hero-section d-flex justify-content-center align-items-center">
+        <div class="container text-center text-white w-100">
+            <h6 class="text-capitalize display-6">Come and Relax</h6>
+            <h3 class="text-uppercase display-3 mb-2 mb-md-4 mt-1 mt-md-2">To Discover Fresher Vibes</h3>
+            <p class="lead mx-0 mx-md-5 mb-3">
+                Welcome to Hugo Hotel, where luxury and tranquility converge. Immerse yourself in the comfort of our
+                elegantly designed rooms, offering breathtaking views and modern amenities. Experience a stay that
+                transcends expectations, ensuring moments of relaxation and sophistication at every turn.
+            </p>
+            <a class="btn btn-lg btn-primary btn-icon"
+               th:href="@{/reservation}"
+            >
+                Booking <i class="fas fa-location-arrow ms-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="container-fluid">
+        <div class="container my-5">
+            <div class="row gap-3 gap-md-0 mb-4 mb-md-5"
+                 th:each="index : ${#numbers.sequence(1, 3)}"
+            >
+                <div class="col-md-6"
+                     th:classappend="${index % 2 == 0} ? 'order-1 order-md-2' : ''"
+                >
+                    <div class="card shadow">
+                        <img class="card-img" alt="room-image"
+                             th:src="${'image/room' + index + '.jpg'}"
+                        >
+                    </div>
+                </div>
+                <div class="col-md-6 my-auto"
+                     th:classappend="${index % 2 == 0} ? 'text-start text-md-end order-2 order-md-1' : ''"
+                >
+                    <h2 class="mb-3"
+                        th:text="${rooms[index].section}"
+                    ></h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad harum optio quam sit!
+                        Accusantium ad
+                        amet assumenda iusto natus possimus quaerat. Commodi consequuntur eos est magni porro ratione
+                        unde!
+                    </p>
+                    <a class="btn btn-primary btn-icon"
+                       th:href="@{/reservation}"
+                    >
+                        Booking <i class="fas fa-location-arrow ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="my-5">
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="/image/person1.jpg" class="img-fluid" alt="person-image">
+                        </div>
+                        <div class="col-md-6 p-4 bg-primary-subtle d-flex align-items-center">
+                            <figure class="text-center">
+                                <blockquote class="blockquote">
+                                    <p>
+                                        Fantastic stay at Hugo Hotel! Exceptional service, elegant rooms, and a
+                                        peaceful atmosphere. Highly recommended!
+                                    </p>
+                                </blockquote>
+                                <figcaption class="blockquote-footer">
+                                    William Dong
+                                    <cite class="d-block" title="Review">Last updated 2 weeks ago</cite>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="/image/person2.jpg" class="img-fluid" alt="person-image">
+                        </div>
+                        <div class="col-md-6 p-4 bg-primary-subtle d-flex align-items-center">
+                            <figure class="text-center">
+                                <blockquote class="blockquote">
+                                    <p>
+                                        Hugo Hotel delivers a perfect blend of comfort and sophistication.
+                                        Impeccable service, stylish rooms, and a serene ambiance make it an outstanding
+                                        choice for a relaxing getaway. A truly delightful experience!
+                                    </p>
+                                </blockquote>
+                                <figcaption class="blockquote-footer">
+                                    Royal King
+                                    <cite class="d-block" title="Review">Last updated 1 month ago</cite>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="/image/person3.jpg" class="img-fluid" alt="person-image">
+                        </div>
+                        <div class="col-md-6 p-4 bg-primary-subtle d-flex align-items-center">
+                            <figure class="text-center">
+                                <blockquote class="blockquote">
+                                    <p>
+                                        Serene Haven Hotel is a gem! Elegant, peaceful, and outstanding service. Highly
+                                        recommend for a delightful stay.
+                                    </p>
+                                </blockquote>
+                                <figcaption class="blockquote-footer">
+                                    Steven Jame
+                                    <cite class="d-block" title="Review">Last updated 3 months ago</cite>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev bg-dark" type="button"
+                    data-bs-target="#carouselExample"
+                    data-bs-slide="prev"
+            >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next bg-dark" type="button"
+                    data-bs-target="#carouselExample"
+                    data-bs-slide="next"
+            >
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/masterLayout :: layout(~{::main})">
+<body>
+
+<main role="main">
+    <section class="container-fluid rooms-section d-flex justify-content-center align-items-center">
+        <div class="container text-center text-white w-100">
+            <h6 class="text-capitalize display-6">Unforgettable Comfort</h6>
+            <h3 class="text-uppercase display-3 mb-2 mb-md-4 mt-1 mt-md-2">Collection of Luxurious Rooms</h3>
+            <p class="lead mx-0 mx-md-5 mb-3">
+                Experience opulence in our premium rooms—where luxury meets comfort. Thoughtfully designed, each space
+                combines modern amenities with timeless elegance. Elevate your stay with us and indulge in the epitome
+                of
+                refined living.
+            </p>
+        </div>
+    </section>
+
+    <section class="container-fluid bg-body-secondary py-5">
+        <div class="container">
+            <form method="post"
+                  th:object="${reservation}"
+                  th:action="@{/reservation}"
+            >
+                <div class="row align-items-end row-gap-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="reservationDate">ReservationDate</label>
+                        <input class="form-control" type="date" id="reservationDate" required
+                               th:field="*{reservationDate}"
+                        >
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-start justify-content-md-end">
+                            <button class="btn btn-primary text-uppercase btn-icon" type="submit">
+                                find room <i class="fas fa-location-arrow ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="container-fluid">
+        <div class="container my-5">
+            <div class="row gy-3"
+                 th:if="${!choiceDate}"
+            >
+                <div class="col-lg-4 col-md-6"
+                     th:each="room, roomIndex : ${rooms}"
+                >
+                    <div class="card shadow">
+                        <img class="card-img-top" alt="room-image"
+                             th:src="${'/image/room' + (roomIndex.index + 1) + '.jpg'}"
+                        >
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h4 class="card-title"
+                                    th:text="${room.section}"
+                                ></h4>
+                                <p class="card-text">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus eveniet explicabo
+                                    hic
+                                    iste quisquam quo.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gy-3"
+                 th:if="${choiceDate}"
+            >
+                <div class="col-lg-4 col-md-6"
+                     th:each="dateRoom, roomIndex : ${dateRooms}"
+                >
+                    <div class="card shadow position-relative">
+                        <div class="position-absolute start-0 top-0"
+                             th:if="${!dateRoom.available}"
+                        >
+                            <span class="badge rounded-pill text-bg-danger ms-3 mt-3 py-3 px-4">Unavailable</span>
+                        </div>
+
+                        <img class="card-img-top" alt="room-image"
+                             th:src="${'/image/room' + (roomIndex.index + 1) + '.jpg'}"
+                        >
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h4 class="card-title"
+                                    th:text="${dateRoom.section}"
+                                ></h4>
+                                <p class="card-text">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus eveniet explicabo
+                                    hic
+                                    iste quisquam quo.
+                                </p>
+                                <div
+                                        th:if="${dateRoom.available}"
+                                >
+                                    <a class="btn btn-primary"
+                                       th:href="@{'/reservation/booking-form?roomName=' + ${dateRoom.name} +
+                                   '&reservationDate=' + ${reservation.reservationDate}}"
+                                    >Booking</a>
+                                </div>
+                                <div
+                                        th:if="${!dateRoom.available}"
+                                >
+                                    <a class="btn btn-warning"
+                                       th:href="@{/reservation}"
+                                    >Booking</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/masterLayout :: layout(~{::main})">
+<body>
+
+<main role="main">
+    <section class="container-fluid successful d-flex justify-content-center align-items-center">
+        <div class="container text-center text-dark w-100">
+            <h6 class="text-capitalize display-6">
+                Woohoo! Your hotel stay is confirmed!
+            </h6>
+            <p class="lead mx-0 mx-md-5 mb-3">
+                Get ready for some unforgettable memories at Hugo
+            </p>
+            <a class="btn btn-lg btn-primary btn-icon"
+               th:href="@{/}"
+            >
+                Go To Home <i class="fas fa-location-arrow ms-2"></i>
+            </a>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
