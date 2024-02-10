@@ -31,4 +31,11 @@ public class Reservation {
         this.guest = guest;
         this.reservationDate = reservationDate;
     }
+
+    public Reservation(UUID id, Room room, Guest guest, LocalDate reservationDate) {
+        this.id = id;
+        this.room = room;
+        this.guest = guest;
+        this.reservationDate = reservationDate;
+    }
 }

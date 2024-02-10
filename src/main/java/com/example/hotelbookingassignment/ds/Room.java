@@ -35,6 +35,12 @@ public class Room {
         this.section = section;
     }
 
+    public Room(UUID id, String name, String section) {
+        this.id = id;
+        this.name = name;
+        this.section = section;
+    }
+
     public void addReservation(Reservation reservation) {
         reservation.setRoom(this);
         reservations.add(reservation);

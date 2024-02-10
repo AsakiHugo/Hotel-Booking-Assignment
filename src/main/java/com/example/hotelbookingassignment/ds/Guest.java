@@ -4,16 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
 import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor
@@ -31,5 +29,12 @@ public class Guest {
     public Guest(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Guest(UUID id, String firstName, String lastName, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
     }
 }
