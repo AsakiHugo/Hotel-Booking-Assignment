@@ -2,6 +2,7 @@ package com.example.hotelbookingassignment.ds;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -24,6 +25,8 @@ public class Reservation {
 
     @ManyToOne
     private Guest guest;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservationDate;
 
     public Reservation(Room room, Guest guest, LocalDate reservationDate) {

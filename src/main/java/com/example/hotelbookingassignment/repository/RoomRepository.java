@@ -21,7 +21,7 @@ public interface RoomRepository extends CrudRepository<Room, UUID> {
             where 
             (
                 select count(rs) from r.reservations rs
-                where rs.reservationDate = :date
+                where rs.reservationDate = :date and r.id = rs.room.id
             ) = 0
             order by r.id
             limit 1

@@ -7,14 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Getter
-@EqualsAndHashCode
 @ToString
 @NoArgsConstructor
 public class Room {
@@ -44,5 +40,18 @@ public class Room {
     public void addReservation(Reservation reservation) {
         reservation.setRoom(this);
         reservations.add(reservation);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return Objects.equals(id, room.id) && Objects.equals(name, room.name) && Objects.equals(section, room.section);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, section);
     }
 }

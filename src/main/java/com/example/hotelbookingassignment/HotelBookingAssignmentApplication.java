@@ -32,7 +32,7 @@ public class HotelBookingAssignmentApplication {
     }
 
     @Bean
-    @Profile("data")
+//    @Profile("data")
     public ApplicationRunner runner() {
         return r -> {
             var role1 = new Role("ROLE_ADMIN");
@@ -45,10 +45,10 @@ public class HotelBookingAssignmentApplication {
             guest1.setRole(role2);
 
             var guest2 = new Guest(UUID.randomUUID(), "Asaki", "Hugo", "12345");
-            guest1.setRole(role2);
+            guest2.setRole(role2);
 
             var guest3 = new Guest(UUID.randomUUID(), "Albert", "Myo", "12345");
-            guest2.setRole(role2);
+            guest3.setRole(role2);
 
             guestRepository.save(guest1);
             guestRepository.save(guest2);

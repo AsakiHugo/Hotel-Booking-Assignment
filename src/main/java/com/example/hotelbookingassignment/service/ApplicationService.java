@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 
 @Service
@@ -27,24 +28,27 @@ public class ApplicationService {
     }
 
     public BookingResult bookAnyRoomForNewGuest(String firstName, String lastName, LocalDate date) {
+
         // firstName + lastName => Guest
         var guest = registerGuest(firstName, lastName);
 
         // date => Room
         Room room = null;
+        Optional<Room> tempRoom = bookingService.findAvailableRoom(date);
 
-        if (bookingService.findAvailableRoom(date).isPresent()) {
-            room = bookingService.findAvailableRoom(date).get();
+        if (tempRoom.isPresent()) {
+            room = tempRoom.get();
         }
 
         // Guest + Room + date => Reservation
         Reservation reservation = null;
+        Optional<Reservation> tempReservation = bookingService.bookRoom(room, guest, date);
 
         // Reservation => BookingResult
         BookingResult bookingResult = null;
 
-        if (bookingService.bookRoom(room, guest, date).isPresent()) {
-            reservation = bookingService.bookRoom(room, guest, date).get();
+        if (tempReservation.isPresent()) {
+            reservation = tempReservation.get();
             bookingResult = BookingResult.createRoomBookedResult(reservation);
         } else {
             bookingResult = BookingResult.createNoRoomAvailableResult();
