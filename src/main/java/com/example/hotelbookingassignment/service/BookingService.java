@@ -26,7 +26,7 @@ public class BookingService {
     private RoomRepository roomRepository;
 
     public Optional<Room> findAvailableRoom(LocalDate date) {
-        return roomRepository.findRoomByReservationDate(date);
+        return roomRepository.findAvailableRoom(date);
     }
 
     public Optional<Reservation> bookRoom(String roomName, Guest guest, LocalDate date) {

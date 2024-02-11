@@ -16,15 +16,26 @@ public interface RoomRepository extends CrudRepository<Room, UUID> {
 
     Optional<Room> findByName(String name);
 
+//    @Query("""
+//            select distinct r from Room r
+//            where (
+//            select count (rs) from r.reservations rs
+//            where rs.reservationDate = :date
+//            ) = 0
+//            order by r.id
+//            limit 1
+//            """)
+//    Optional<Room> findRoomByReservationDate(LocalDate date);
+
     @Query("""
-            select distinct r from Room r
-            where 
-            (
-                select count(rs) from r.reservations rs
-                where rs.reservationDate = :date and r.id = rs.room.id
-            ) = 0
-            order by r.id
-            limit 1
+                select distinct r from Room r
+                where not exists (
+                    select 1 from Reservation rs
+                    where rs.room.id = r.id and rs.reservationDate = :date
+                )
+                order by r.id
+                limit 1
             """)
-    Optional<Room> findRoomByReservationDate(LocalDate date);
+    Optional<Room> findAvailableRoom(LocalDate date);
+
 }

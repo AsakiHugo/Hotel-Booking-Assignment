@@ -68,7 +68,7 @@ public class HotelBookingAssignmentApplication {
             roomRepository.save(room5);
             roomRepository.save(room6);
 
-            Reservation reservation = new Reservation(UUID.randomUUID(), room1, guest1, LocalDate.parse("2024-02-10"));
+            Reservation reservation = new Reservation(UUID.randomUUID(), room1, guest1, LocalDate.parse("2024-02-11"));
 
             reservationRepository.save(reservation);
         };

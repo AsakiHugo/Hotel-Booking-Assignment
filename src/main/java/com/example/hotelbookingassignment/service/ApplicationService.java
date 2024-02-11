@@ -36,20 +36,16 @@ public class ApplicationService {
         Room room = null;
         Optional<Room> tempRoom = bookingService.findAvailableRoom(date);
 
-        if (tempRoom.isPresent()) {
-            room = tempRoom.get();
-        }
-
-        // Guest + Room + date => Reservation
-        Reservation reservation = null;
-        Optional<Reservation> tempReservation = bookingService.bookRoom(room, guest, date);
-
         // Reservation => BookingResult
         BookingResult bookingResult = null;
 
-        if (tempReservation.isPresent()) {
-            reservation = tempReservation.get();
+        if (tempRoom.isPresent()) {
+            room = tempRoom.get();
+
+            // Guest + Room + date => Reservation
+            Reservation reservation = bookingService.bookRoom(room, guest, date).get();
             bookingResult = BookingResult.createRoomBookedResult(reservation);
+
         } else {
             bookingResult = BookingResult.createNoRoomAvailableResult();
         }
@@ -62,6 +58,6 @@ public class ApplicationService {
     }
 
     public BookingResult bookSpecificRoomForRegisteredGuest(Guest guest, String roomName, LocalDate date) {
-       return null;
+        return null;
     }
 }

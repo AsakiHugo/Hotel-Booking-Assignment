@@ -3,11 +3,12 @@ package com.example.hotelbookingassignment.ds;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 @EqualsAndHashCode
 @ToString
-public class BookingResult {
+public class BookingResult implements Serializable {
     private BookingState bookingState;
     private Reservation reservation;
 
