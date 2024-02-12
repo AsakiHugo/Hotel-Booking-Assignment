@@ -54,7 +54,7 @@ public class ApplicationService {
     }
 
     public BookingResult bookAnyRoomForRegisteredGuest(Guest guest, LocalDate date) {
-        return null;
+        return bookAnyRoomForNewGuest(guest.getFirstName(), guest.getLastName(), date);
     }
 
     public BookingResult bookSpecificRoomForRegisteredGuest(Guest guest, String roomName, LocalDate date) {

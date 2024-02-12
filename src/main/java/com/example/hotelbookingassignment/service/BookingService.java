@@ -29,16 +29,16 @@ public class BookingService {
         return roomRepository.findAvailableRoom(date);
     }
 
-    public Optional<Reservation> bookRoom(String roomName, Guest guest, LocalDate date) {
-        return null;
-    }
-
     @Transactional
     public Optional<Reservation> bookRoom(Room room, Guest guest, LocalDate date) {
         var reservation = new Reservation(room, guest, date);
         reservation.setId(UUID.randomUUID());
         reservationRepository.save(reservation);
         return reservationRepository.findById(reservation.getId());
+    }
+
+    public Optional<Reservation> bookRoom(String roomName, Guest guest, LocalDate date) {
+        return null;
     }
 
     private boolean isRoomAvailableAtDate(Room room, LocalDate date) {
