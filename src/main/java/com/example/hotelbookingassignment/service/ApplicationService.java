@@ -28,6 +28,10 @@ public class ApplicationService {
         return bookingService.findAll();
     }
 
+    public Set<Reservation> findAllByReservationDate(LocalDate date) {
+        return bookingService.findAllByReservationDate(date);
+    }
+
     public Guest registerGuest(String firstName, String lastName) {
         return guestRegistrationService.registerGuest(new Guest(firstName, lastName));
     }

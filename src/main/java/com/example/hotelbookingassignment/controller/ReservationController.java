@@ -2,6 +2,7 @@ package com.example.hotelbookingassignment.controller;
 
 import com.example.hotelbookingassignment.ds.BookingResult;
 import com.example.hotelbookingassignment.ds.Guest;
+import com.example.hotelbookingassignment.ds.Reservation;
 import com.example.hotelbookingassignment.ds.Room;
 import com.example.hotelbookingassignment.service.ApplicationService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 @RestController
@@ -49,5 +51,10 @@ public class ReservationController {
         var bookingResult = applicationService
                 .bookSpecificRoomForRegisteredGuest(guest, roomName, date);
         return ResponseEntity.status(HttpStatus.CREATED).body(bookingResult);
+    }
+
+    @GetMapping(value = "/reservation/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<Reservation>> findAllReservations(@PathVariable LocalDate date) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(applicationService.findAllByReservationDate(date));
     }
 }

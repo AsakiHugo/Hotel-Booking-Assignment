@@ -30,6 +30,10 @@ public class BookingService {
         return roomRepository.findAll();
     }
 
+    public Set<Reservation> findAllByReservationDate(LocalDate date) {
+        return reservationRepository.findAllByReservationDate(date);
+    }
+
     public Optional<Room> findAvailableRoom(LocalDate date) {
         return roomRepository.findAvailableRoom(date);
     }

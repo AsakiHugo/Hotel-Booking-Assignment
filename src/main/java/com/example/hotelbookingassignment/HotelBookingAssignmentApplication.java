@@ -32,7 +32,7 @@ public class HotelBookingAssignmentApplication {
     }
 
     @Bean
-//    @Profile("data")
+    @Profile("data")
     public ApplicationRunner runner() {
         return r -> {
             var role1 = new Role("ROLE_ADMIN");
