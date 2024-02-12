@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Service
@@ -22,6 +23,10 @@ public class ApplicationService {
 
     @Autowired
     private BookingService bookingService;
+
+    public Set<Room> findAll() {
+        return bookingService.findAll();
+    }
 
     public Guest registerGuest(String firstName, String lastName) {
         return guestRegistrationService.registerGuest(new Guest(firstName, lastName));
@@ -58,6 +63,19 @@ public class ApplicationService {
     }
 
     public BookingResult bookSpecificRoomForRegisteredGuest(Guest guest, String roomName, LocalDate date) {
-        return null;
+        // guest => Guest
+        var existingGuest = registerGuest(guest.getFirstName(), guest.getLastName());
+
+        // Guest + roomName + date => Reservation
+        var tempReservation = bookingService.bookRoom(roomName, existingGuest, date);
+
+        // Reservation => BookingResult
+        var bookingResult = BookingResult.createNoRoomAvailableResult();
+
+        if (tempReservation.isPresent()) {
+            bookingResult = BookingResult.createRoomBookedResult(tempReservation.get());
+        }
+
+        return bookingResult;
     }
 }

@@ -5,6 +5,7 @@ import com.example.hotelbookingassignment.ds.Reservation;
 import com.example.hotelbookingassignment.ds.Room;
 import com.example.hotelbookingassignment.repository.ReservationRepository;
 import com.example.hotelbookingassignment.repository.RoomRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class BookingService {
     @Autowired
     private RoomRepository roomRepository;
 
+    public Set<Room> findAll() {
+        return roomRepository.findAll();
+    }
+
     public Optional<Room> findAvailableRoom(LocalDate date) {
         return roomRepository.findAvailableRoom(date);
     }
@@ -38,10 +43,22 @@ public class BookingService {
     }
 
     public Optional<Reservation> bookRoom(String roomName, Guest guest, LocalDate date) {
-        return null;
+        // roomName => Room
+        var room = roomRepository.findByName(roomName)
+                .orElseThrow(EntityNotFoundException::new);
+
+        // Room + Guest + date => Reservation
+        Optional<Reservation> reservation = Optional.empty();
+        var hasReservation = isRoomAvailableAtDate(room, date);
+
+        if (hasReservation == false) {
+            reservation = bookRoom(room, guest, date);
+        }
+
+        return reservation;
     }
 
     private boolean isRoomAvailableAtDate(Room room, LocalDate date) {
-        return false;
+        return reservationRepository.existsByRoomAndReservationDate(room, date);
     }
 }
